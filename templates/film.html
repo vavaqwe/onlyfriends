@@ -46,26 +46,23 @@
                     <p>{{gettext('Описание:')}} {{ movie_data.overview }}</p>
                 </div>
             </div>
-            <div class="film__video">
-                <div id="kinoplayertop" data-title="{{ movie_name.name   ~ ' ' ~ movie_data.first_air_date[:4] ~ ' / ' ~ movie_data.original_title }}"></div>
-                <script src="//kinoplayer.top/top.js"></script>
-            </div>
+            <video
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+                width="640"
+                height="264"
+                poster="MY_VIDEO_POSTER.jpg"
+                data-setup="{}"
+                >
+                <source src="https://www.youtube.com/watch?v={{trailer_key}}" type="video/mp4" />
+                </p>
+            </video>
         </div>
     {% endif %}
-    <div id="ad-container" class="add">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5755563215796982"
-             crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-5755563215796982"
-             data-ad-slot="5734415748"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
 </div>
     <script src="{{url_for('static',filename='js/film.js')}}"></script>
+    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
 
 {% endblock %}

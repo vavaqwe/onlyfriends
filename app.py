@@ -153,7 +153,7 @@ def movie_details(content_type, movie_id):
     response = requests.get(url)
     movie_data = response.json()
 
-    url = f'https://api.themoviedb.org/3/{content_type}/{movie_id}?api_key={api_key}&language=ru-RU&include_adult=false&append_to_response=release_dates'
+    url = f'https://api.themoviedb.org/3/{content_type}/movie/{movie_id}?api_key={api_key}&language=ru-RU&include_adult=false&append_to_response=release_dates'
     response = requests.get(url)
     movie_data_for_name = response.json()
     return render_template('film.html', movie_data=movie_data, content_type=content_type, movie_name=movie_data_for_name)
