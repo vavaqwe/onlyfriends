@@ -1,0 +1,127 @@
+# English translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-09-16 12:34+0300\n"
+"PO-Revision-Date: 2023-09-16 12:34+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: app.py:179 app.py:181
+msgid "Error fetching data from TMDb"
+msgstr "Error fetching data from TMDb"
+
+#: app.py:195
+msgid "Please enter a name."
+msgstr "Please enter a name."
+
+#: app.py:198
+msgid "Please enter a room code."
+msgstr "Please enter a room code."
+
+#: app.py:209
+msgid "Room does not exist."
+msgstr "Room does not exist."
+
+#: app.py:327
+msgid "Неверный пароль"
+msgstr "Incorrect password"
+
+#: app.py:331
+msgid "Пользователь не найден"
+msgstr "User not found"
+
+#: app.py:390
+msgid "Пользователь с таким именем уже существует"
+msgstr "A user with this name already exists"
+
+#: app.py:393
+msgid "Слишком маленький пароль | минимальная длина 8 символов"
+msgstr "Password too small | minimum length 8 characters"
+
+#: templates/base.html:29 templates/genre.html:5
+msgid "Фильмы"
+msgstr "Movies"
+
+#: templates/base.html:30 templates/genre.html:13
+msgid "Сериалы"
+msgstr "Serials"
+
+#: templates/base.html:31
+msgid "Жанры"
+msgstr "Genres"
+
+#: templates/base.html:34 templates/base.html:35
+msgid "Search"
+msgstr "Search"
+
+#: templates/base.html:43
+msgid "Профиль"
+msgstr "Profile"
+
+#: templates/base.html:44 templates/profile.html:7
+msgid "Выход"
+msgstr "Exit"
+
+#: templates/base.html:49
+msgid "Вход"
+msgstr "Login"
+
+#: templates/base.html:50 templates/register.html:8
+msgid "Регистрация"
+msgstr "Registration"
+
+#: templates/genres.html:19 templates/genres.html:37 templates/index.html:45
+msgid "Оценка :"
+msgstr "Evaluation :"
+
+#: templates/genres.html:20 templates/genres.html:38 templates/index.html:46
+#: templates/search.html:25 templates/search.html:28 templates/tv.html:18
+msgid "Смотреть"
+msgstr "Watch"
+
+#: templates/genres.html:50 templates/genres.html:52 templates/genres.html:85
+#: templates/genres.html:87 templates/index.html:56 templates/index.html:58
+#: templates/search.html:57 templates/search.html:59 templates/tv.html:29
+#: templates/tv.html:31
+msgid "Предыдущая"
+msgstr "Previous"
+
+#: templates/genres.html:73 templates/genres.html:75 templates/genres.html:108
+#: templates/genres.html:110 templates/index.html:77 templates/index.html:79
+#: templates/search.html:69 templates/search.html:71 templates/tv.html:50
+#: templates/tv.html:52
+msgid "Следующая"
+msgstr "Next"
+
+#: templates/login.html:9
+msgid "Вхід"
+msgstr "Login"
+
+#: templates/login.html:13 templates/register.html:12
+msgid "Nickname"
+msgstr "Nickname"
+
+#: templates/login.html:17 templates/register.html:16
+msgid "Password"
+msgstr "Password"
+
+#: templates/profile.html:8
+msgid "Удалить"
+msgstr "Delete"
+
+#: templates/search.html:4
+msgid "Search Results"
+msgstr "Результаты поиска"
+

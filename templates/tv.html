@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container main_movies">
+        <h1 class="search__results">{{gettext('Сериалы')}}</h1>
+        <div class="movies">
+            {% for movie in movies %}
+                <div class="card card-films" style="width: 18rem;">
+                    <a href="{{ url_for('movie_details',content_type='tv' , movie_id=movie.id) }}">
+                        <img class="logo_film" src="{{ movie.poster_path }}" alt="{{ movie.title }} Poster" class="card-img-top">
+                    </a>
+                   <span class="dot">{{ movie.vote_average }}</span>
+                    <div class="card-body">
+                        {%if movie.title|length < 20 %}
+                            <h5 class="card-title"><strong>{{movie.title}}</strong></h5>
+                        {% else %}
+                            <h5 style="font-size: 18px;" class="card-title"><strong>{{movie.title}}</strong></h5>
+                        {% endif %}
+                        <div class="con_skip"></div>
+                        <a href="{{ url_for('movie_details',content_type='tv' , movie_id=movie.id) }}" class="watch">{{gettext('Смотреть')}}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<div class="container slides">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {%if current_page == 1 %}
+                <li class="page-item disabled "><a href="{{ url_for('serials', page=current_page - 1) }}" class="page-link">{{gettext('Предыдущая')}}</a></li>
+            {% else %}
+                <li class="page-item"><a href="{{ url_for('serials', page=current_page - 1) }}" class="page-link">{{gettext('Предыдущая')}}</a></li>
+            {% endif %}
+            {% set max_pages = 5 %}
+            {% if current_page > max_pages // 2 %}
+                {% set start_page = current_page - (max_pages // 2) %}
+                {% set end_page = current_page + (max_pages // 2) %}
+                {% if end_page > total_pages %}
+                    {% set start_page = total_pages - max_pages + 1 %}
+                    {% set end_page = total_pages %}
+                {% endif %}
+            {% else %}
+                {% set start_page = 1 %}
+                {% set end_page = max_pages %}
+            {% endif %}
+
+            {% for page_num in range(start_page, end_page + 1) %}
+                <li class="page-item {% if current_page == page_num %}active{% endif %} "><a class="page-link" href="{{ url_for('serials', page=page_num) }}">{{page_num}}</a></li>
+            {% endfor %}
+            {%if current_page == end_page %}
+                <li class="page-item disabled"><a href="{{ url_for('serials', page=current_page + 1) }}" class="page-link">{{gettext('Следующая')}}</a></li>
+            {% else %}
+                <li class="page-item"><a href="{{ url_for('serials', page=current_page + 1) }}" class="page-link">{{gettext('Следующая')}}</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container main_movies">
+    <h1 class="search__results">{{gettext('Фильмы')}}</h1>
+    <div class="movies">
+        {% for genre in movie.genres %}
+            <li>
+                <a class="a_link genres" href="{{ url_for('with_genres' ,genre=genre.id, type='movies')}}">{{ genre.name }}</a>
+            </li>
+        {% endfor %}
+    </div>
+    <h1 class="search__results">{{gettext('Сериалы')}}</h1>
+    <div class="movies">
+            {% for genre in tv.genres %}
+                <li>
+                    <a class="a_link genres" href="{{ url_for('with_genres' ,genre=genre.id, type='serials')}}">{{ genre.name }}</a>
+                </li>
+            {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container main_movies">
+    <h1 class="search__results">{{gettext('Search Results')}}</h1>
+    <div class="container movies">
+        {% for movie in results %}
+            <div class="card card-films" style="width: 18rem;">
+                {% if movie['media_type'] == 'tv'%}
+                    <a href="{{ url_for('movie_details', content_type='tv', movie_id=movie.id) }}" class="logo">
+                        <img class="logo_film" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }} Poster" class="card-img-top">
+                    </a>
+                    <span class="dot">{{ movie.vote_average|get_first_two_digits  }}</span>
+                {% else %}
+                    <a href="{{ url_for('movie_details', content_type='movie', movie_id=movie.id) }}" class="logo">
+                        <img class="logo_film" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }} Poster" class="card-img-top">
+                    </a>
+                    <span class="dot">{{ movie.vote_average|get_first_two_digits  }}</span>
+
+                {% endif %}
+                <div class="card-body">
+                    {% if "name" in movie %}
+                        <h5 class="card-title">{{ movie.name }}</h5>
+                    {% else %}
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                    {% endif %}
+                    {% if movie['media_type'] == 'tv'%}
+                        <div class="con_skip"></div>
+                        <a href="{{ url_for('movie_details', content_type='tv', movie_id=movie.id) }}" class="watch">{{gettext('Смотреть')}}</a>
+                    {%else%}
+                        <div class="con_skip"></div>
+                        <a href="{{ url_for('movie_details', content_type='movie', movie_id=movie.id) }}" class="watch">{{gettext('Смотреть')}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+   {% if total_pages == 1 %}
+
+    {%else%}
+    <div class="container slides">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% set max_pages = 5 %}
+                {%if total_pages < 5 %}
+                    {% set max_pages = total_pages %}
+                {% endif %}
+                {% if current_page > max_pages // 2 %}
+                    {% set start_page = current_page - (max_pages // 2) %}
+                    {% set end_page = current_page + (max_pages // 2) %}
+                    {% if end_page > total_pages %}
+                        {% set start_page = total_pages - max_pages + 1 %}
+                        {% set end_page = total_pages %}
+                    {% endif %}
+                {% else %}
+                    {% set start_page = 1 %}
+                    {% set end_page = max_pages %}
+                {% endif %}
+
+                {% if current_page == 1 %}
+                    <li class="page-item disabled"><a href="{{ url_for('search_movie', page=current_page - 1, query=query) }}" class="page-link border-0">{{gettext('Предыдущая')}}</a></li>
+                {% else %}
+                    <li class="page-item"><a href="{{ url_for('search_movie', page=current_page - 1, query=query) }}" class="page-link border-0">{{gettext('Предыдущая')}}</a></li>
+                {% endif %}
+
+                {% for page_num in range(start_page, end_page + 1) %}
+                    <li class="page-item {% if current_page == page_num %}active{% endif %}">
+                        <a class="page-link" border-0 href="{{ url_for('search_movie', page=page_num, query=query) }}">{{page_num}}</a>
+                    </li>
+                {% endfor %}
+
+                {% if current_page == total_pages %}
+                    <li class="page-item disabled"><a href="{{ url_for('search_movie', page=current_page + 1, query=query) }}" class="page-link border-0">{{gettext('Следующая')}}</a></li>
+                {% else %}
+                    <li class="page-item"><a href="{{ url_for('search_movie', page=current_page + 1, query=query) }}" class="page-link border-0">{{gettext('Следующая')}}</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OnlyFriends</title>
+    {% block head %} {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link id="theme-link" rel="stylesheet" href="{{url_for('static',filename='css/theme-dark.css')}}"/>
+    <link  rel="stylesheet" href="{{url_for('static',filename='css/login_register.css')}}"/>
+    <link rel="icon" href="{{url_for('static',filename='img/favicon.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{url_for('static',filename='img/favicon.ico')}}" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js" integrity="sha512-74AKPNm8Tfd5E9c4otg7XNkIVfIe5ynON7wehpX/9Tv5VYcZvXZBAlcgOAjLHg6HeWyLujisAnle6+iKnyWd9Q==" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5755563215796982"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="p-0 mb-8 border-bottom">
+    <nav class="navbar navbar-expand-md ">
+        <div class="container">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 px-3 link-body-emphasis text-decoration-none">
+                <img src="{{url_for('static', filename='img/favicon.ico')}}" height="50px" width="45px">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="nav col-lg-auto me-lg-auto mb-2 mb-md-0">
+                    <li class="nav-item"><a href="{{url_for('index')}}" class="nav-link px-2 ">{{gettext('Фильмы')}}</a></li>
+                    <li class="nav-item"><a href="{{url_for('serials')}}" class="nav-link px-2 ">{{gettext('Сериалы')}}</a></li>
+                    <li class="nav-item"><a href="{{url_for('genres_list')}}" class="nav-link px-2 ">{{gettext('Жанры')}}</a></li>
+                </ul>
+                <form class="d-flex col-lg-auto form__search" action="/search" role="search" method="post">
+                    <input class="form-control input__search" name="query" type="search" placeholder="Search" aria-label="{{gettext('Search')}}">
+                    <button class="nav-item btn btn-outline-dark my-2 my-sm-0 btn__search" type="submit">{{gettext('Search')}}</button>
+                </form>
+                <label id="switch" class="switch">
+                    <input type="checkbox" onchange="toggleTheme()" id="slider">
+                    <span class="slider round"></span>
+                </label>
+                {% if current_user.is_authenticated %}
+                <div class="nav-item dropdown">
+                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ current_user.username }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="nav-item"><a class="dropdown-item" href="{{url_for('profile')}}">{{gettext('Профиль')}}</a></li>
+                        <li class="nav-item"><a class="dropdown-item" href="{{ url_for('logout') }}">{{gettext('Выход')}}</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="me-1 justify-content-center button__container">
+                    <button class="nav-item btn btn-dark m-1 mx-lg-0" data-bs-toggle="modal" data-bs-target="#login_modal">{{gettext('Вход')}}</button>
+                    <button class="nav-item btn btn-dark m-1 mx-lg-1" data-bs-toggle="modal" data-bs-target="#register_modal">{{gettext('Регистрация')}}</button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <div class="modal fade" id="login_modal" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="myform ">
+                        <h1 class="text-center">Login Form</h1>
+                        <form id="login_form" class="" method="POST" action="/login">
+                            <div class="mb-3 mt-4">
+                                <label for="username_login" class="form-label">Username</label>
+                                <input name="username" type="text" class="form-control form-control_log_reg" id="username_login" aria-describedby="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_login" class="form-label">Password</label>
+                                <input name="password" type="password" class="form-control form-control_log_reg" id="password_login">
+                            </div>
+                            <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+                            <p>Not a member? <a href="#" class="a_reg" data-bs-toggle="modal" data-bs-target="#register_modal" id="toggleSignup">Sign up now</a></p>
+                        <div id="error_message_login" class="text-danger"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="register_modal" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="myform">
+                        <h1 class="text-center">Register Form</h1>
+                        <form id="register_form" class="" method="POST" action="/register">
+                            <div class="mb-3 mt-4">
+                                <label for="username_regestration" class="form-label">Email address</label>
+                                <input name="username" type="text" class="form-control form-control_log_reg" id="username_regestration" aria-describedby="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_registration" class="form-label">Password</label>
+                                <input name="password" type="password" class="form-control form-control_log_reg" id="password_registration">
+                            </div>
+                            <button type="submit" class="btn btn-light mt-3">SIGNUP</button>
+                        </form>
+                        <div id="error_message_register" class="text-danger"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% block body %} {% endblock %}
+    <script src="{{url_for('static',filename='js/base.js')}}"></script>
+    <script>
+    $(document).ready(function() {
+        // Обработка отправки формы
+        $('#login_form').submit(function(event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            var formData = $(this).serialize(); // Получаем данные формы в формате, пригодном для отправки
+
+            $.ajax({
+                type: 'POST',
+                url: '/login',
+                data: formData,
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Вход выполнен успешно, выполните действия, такие как перенаправление на другую страницу
+                        window.location.href = response.redirect;
+                    } else {
+                        // Выведите сообщение об ошибке
+                        $('#error_message_login').text(response.message);
+                    }
+                },
+                error: function() {
+                    // Обработка ошибки AJAX-запроса
+                    alert('Произошла ошибка при отправке запроса');
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+        // Обработка отправки формы регистрации
+        $('#register_form').submit(function(event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            var formData = $(this).serialize(); // Получаем данные формы в формате, пригодном для отправки
+
+            $.ajax({
+                type: 'POST',
+                url: '/register',
+                data: formData,
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Регистрация выполнена успешно, выполните действия, такие как перенаправление на другую страницу
+                        window.location.href = response.redirect;
+                    } else {
+                        // Выведите сообщение об ошибке
+                        $('#error_message_register').text(response.message);
+                    }
+                },
+                error: function() {
+                    // Обработка ошибки AJAX-запроса
+                    alert('Произошла ошибка при отправке запроса');
+                }
+            });
+        });
+    });
+     // function to set a given theme/color-scheme
+        function setTheme(themeName) {
+            const linkElement = document.getElementById('theme-link');
+            linkElement.setAttribute('href', `{{ url_for('static', filename='css/') }}${themeName}.css`);
+            localStorage.setItem('theme', themeName);
+        }
+
+        function toggleTheme() {
+            if (localStorage.getItem('theme') === 'theme-dark') {
+                setTheme('theme-light');
+            } else {
+                setTheme('theme-dark');
+            }
+        }
+
+        // Immediately invoked function to set the theme on initial load
+        (function () {
+            if (localStorage.getItem('theme') === 'theme-dark') {
+                setTheme('theme-dark');
+                document.getElementById('slider').checked = false;
+            } else {
+                setTheme('theme-light');
+              document.getElementById('slider').checked = true;
+            }
+        })();
+    </script>
+
+</body>
+</html>

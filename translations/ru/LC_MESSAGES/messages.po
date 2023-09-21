@@ -1,0 +1,128 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-09-16 12:34+0300\n"
+"PO-Revision-Date: 2023-09-16 12:34+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: app.py:179 app.py:181
+msgid "Error fetching data from TMDb"
+msgstr ""
+
+#: app.py:195
+msgid "Please enter a name."
+msgstr "Пожалуйста, введите имя."
+
+#: app.py:198
+msgid "Please enter a room code."
+msgstr "Пожалуйста, введите код комнаты"
+
+#: app.py:209
+msgid "Room does not exist."
+msgstr "Комната не существует."
+
+#: app.py:327
+msgid "Неверный пароль"
+msgstr "Неверный пароль"
+
+#: app.py:331
+msgid "Пользователь не найден"
+msgstr "Пользователь не найден"
+
+#: app.py:390
+msgid "Пользователь с таким именем уже существует"
+msgstr "Пользователь с таким именем уже существует"
+
+#: app.py:393
+msgid "Слишком маленький пароль | минимальная длина 8 символов"
+msgstr "Слишком маленький пароль | минимальная длина 8 символов"
+
+#: templates/base.html:29 templates/genre.html:5
+msgid "Фильмы"
+msgstr "Фильмы"
+
+#: templates/base.html:30 templates/genre.html:13
+msgid "Сериалы"
+msgstr "Сериалы"
+
+#: templates/base.html:31
+msgid "Жанры"
+msgstr "Жанры"
+
+#: templates/base.html:34 templates/base.html:35
+msgid "Search"
+msgstr "Поиск"
+
+#: templates/base.html:43
+msgid "Профиль"
+msgstr "Профиль"
+
+#: templates/base.html:44 templates/profile.html:7
+msgid "Выход"
+msgstr "Выход"
+
+#: templates/base.html:49
+msgid "Вход"
+msgstr "Вход"
+
+#: templates/base.html:50 templates/register.html:8
+msgid "Регистрация"
+msgstr "Регистрация"
+
+#: templates/genres.html:19 templates/genres.html:37 templates/index.html:45
+msgid "Оценка :"
+msgstr "Оценка :"
+
+#: templates/genres.html:20 templates/genres.html:38 templates/index.html:46
+#: templates/search.html:25 templates/search.html:28 templates/tv.html:18
+msgid "Смотреть"
+msgstr "Смотреть"
+
+#: templates/genres.html:50 templates/genres.html:52 templates/genres.html:85
+#: templates/genres.html:87 templates/index.html:56 templates/index.html:58
+#: templates/search.html:57 templates/search.html:59 templates/tv.html:29
+#: templates/tv.html:31
+msgid "Предыдущая"
+msgstr "Предыдущая"
+
+#: templates/genres.html:73 templates/genres.html:75 templates/genres.html:108
+#: templates/genres.html:110 templates/index.html:77 templates/index.html:79
+#: templates/search.html:69 templates/search.html:71 templates/tv.html:50
+#: templates/tv.html:52
+msgid "Следующая"
+msgstr "Следующая"
+
+#: templates/login.html:9
+msgid "Вхід"
+msgstr "Вход"
+
+#: templates/login.html:13 templates/register.html:12
+msgid "Nickname"
+msgstr "Логин"
+
+#: templates/login.html:17 templates/register.html:16
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/profile.html:8
+msgid "Удалить"
+msgstr "Удалить"
+
+#: templates/search.html:4
+msgid "Search Results"
+msgstr "Результаты поиска"
+

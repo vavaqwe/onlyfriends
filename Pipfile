@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-sqlalchemy = "*"
+flask-login = "*"
+flask-httpauth = "*"
+flask-socketio = "*"
+simple-websocket = "*"
+gunicorn = "*"
+eventlet = "*"
+flask-cors = "*"
+requests = "*"
+flask-bcrypt = "*"
+flask-babel = "==2.0.0"
+jinja2 = "==3.0.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+python_full_version = "3.9.13"

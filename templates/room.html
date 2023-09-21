@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+{% endblock %}
+
+{% block body %}
+    <div class="room__code">
+        <h1>Room : {{ code }}</h1>
+    </div>
+    <div class="container video__container">
+        <div style="flex: 1;">
+            <div>
+                <video id="player"controls class="video-js video__player" preload="auto" width="480" muted>
+                    <source src="https://pereosvidetelstvovanie.ru:7232/movies/%D0%A4%D0%B8%D0%BB%D1%8C%D0%BC%D1%8B/%D0%9C%D0%B5%D0%BB%D0%BE%D0%B4%D1%80%D0%B0%D0%BC%D1%8B/%D0%91%D0%BB%D0%B8%D0%B7%D0%BE%D1%81%D1%82%D1%8C%20(2004).mp4" type="video/mp4">
+                    <button class="" id="play-button" title="Play"></button>
+                </video>
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <div class="chat__container">
+                <div id="chat-container" class="container">
+                    <div id="chat-messages"></div>
+                    <label for="chat-input"></label><input class="form-control me-2" type="text" id="chat-input" placeholder="Type your message...">
+                    <button class="btn btn-outline-success" id="chat-send">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script src="{{url_for('static',filename='js/room.js')}}"></script>
+{% endblock %}

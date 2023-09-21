@@ -1,0 +1,522 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+.nav-link{
+    color: #000000;
+}
+.nav-link:hover{
+    color: #2f2f2f;
+}
+.logout_link{
+    margin: 5px;
+    background-color: #212529;
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout_link:hover{
+    background-color: #32363b;
+}
+
+.remove_link{
+    margin: 5px;
+    background-color: #212529;
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.remove_link:hover{
+    background-color: #32363b;
+}
+
+.header__img{
+    height: 48px;
+    width: 48px;
+}
+
+.main_movies{
+    padding:10px 0 10px 0;
+    justify-content: center;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    border-radius:15px;
+}
+
+.dot {
+    position: absolute;
+    top: 10px; /* Позиция от верхнего края */
+    right: 10px; /* Позиция от левого края */
+    width: 35px;
+    height: 35px;
+    background-color: #3b3636; /* Цвет точки */
+    border-radius: 50%; /* Для создания круглой точки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Цвет текста */
+    font-weight: bold;
+}
+.con_skip{
+    height: 10px;
+}
+.card-body{
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.card-films{
+    margin:15px;
+    padding: 0;
+    max-width: 280px; /* Задайте максимальную ширину для карточки */
+    overflow: hidden;
+    border-radius: 20px;
+    text-align: center;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+.search__results{
+    text-align: center;
+}
+
+.movies{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+
+.slides {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0); /* Добавьте фон, если необходимо */
+    padding-top: 20px;
+}
+
+header {
+    margin-bottom: 30px;
+    background: #fff;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px 0 10px 0;
+}
+
+.container__head {
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.btn{
+    margin-top:10px;
+}
+
+.btn-primary {
+  margin-top: 10px;
+}
+
+.a_link {
+    margin-left: 5px;
+    background-color: #212529;
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+.a_reg{
+    text-decoration: underline;
+}
+.a_link:hover{
+    background-color: #32363b;
+}
+
+.border-bottom {
+    border-bottom: none !important;
+}
+
+.button__container{
+    padding: 10px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+
+.input__search{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.btn-dark{
+    margin: 0;
+}
+
+.form__search{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+}
+
+.btn__search {
+    margin-left: 7px;
+}
+.card-title-long {
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .card-films{
+        margin:15px;
+        padding: 0;
+        max-width: 150px; /* Задайте максимальную ширину для карточки */
+        overflow: hidden;
+        border-radius: 20px;
+        text-align: center;
+        -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+
+    }
+    .card-title-long {
+       font-size: 13px;
+    }
+    .card-title{
+        font-size: 15px;
+    }
+    .nav .nav-item{
+        display: flex;
+    }
+    .dropdown{
+        display: flex;
+        justify-content: center;
+    }
+    .navbar-collapse .nav{
+        display: flex;
+        justify-content: center;
+    }
+    .movie-info{
+        font-size: 11px;
+    }
+    .name_film{
+        font-size: 20px;
+    }
+    .title{
+        max-height: 240px;
+        margin-right: 10px; /* Расстояние между изображением и текстом */
+    }
+    .film__video {
+        margin-top: 20px;
+    }
+
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+}
+
+.watch{
+    margin-left: 5px;
+    background-color: #000000;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.watch:hover{
+    background: #2f2c2c;
+}
+
+.my-video{
+    height: 450px ;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.film_container{
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.title{
+    height: 500px;
+}
+
+.name_film{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: #333;
+}
+
+.a_reg:hover{
+    color: #2c2929;
+}
+.logo_film{
+    width: 100%;
+    height: auto;
+    position: relative;
+	overflow: hidden;
+    border-radius: 20px 20px 0 0 ;
+}
+.card-films:hover {
+    transform: scale(1.02);
+}
+.film__video {
+    display: flex;
+    justify-content: center; /* Горизонтальное выравнивание по центру */
+    margin-top: 20px;
+    margin-left: 10%;/* Вертикальное выравнивание по центру */
+    max-height: 80%; /* Установите желаемую высоту, например, 100% видимой высоты экрана */
+    max-width: 80%;
+}
+
+li {
+    list-style-type: none;
+}
+
+.genres{
+    margin: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.genre_link{
+    text-transform: lowercase;
+    color: #000;
+}
+
+.genre_link:hover {
+    cursor: pointer;
+    color: #595656;
+}
+
+.join {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.create-btn {
+  width: 100%;
+}
+
+.main{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    background-color: bisque;
+    border-radius: 30px;
+}
+
+#chat-container {
+    margin-top: 20px;
+    width: 300px;
+}
+
+.page-item.active .page-link{
+    background: #000000; !important;
+    color: #ffffff; !important;
+}
+.page-item .page-link {
+    background: #ffffff; !important;
+    color: #000000; !important;
+}
+.btn:focus,
+.btn:active,
+.btn:hover,
+.form-control:focus,
+.input-group-text:focus,
+.custom-select:focus {
+    outline: none; /* Убираем обводку */
+    box-shadow: none; /* Убираем тень */
+    border-color: #ced4da; /* Меняем цвет рамки (если нужно) */
+}
+
+#chat-messages {
+    height: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f4f4f4;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.dropdown .dropdown-toggle{
+    margin: 0;
+}
+
+.video__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    background-color: bisque;
+    border-radius: 10px;
+}
+
+.container__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px; /* Отступ между видео и чатом */
+}
+
+.chat__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.room__code{
+    display: flex;
+    justify-content: center;
+}
+
+.movie-details {
+    display: flex; /* Это включает flex-контейнер */
+    align-items: center; /* Выравнивание элементов по вертикали */
+
+}
+
+.movie-image img {
+    max-width: 100%; /* Изображение будет масштабироваться до максимальной ширины контейнера */
+    margin-right: 20px; /* Расстояние между изображением и текстом */
+}
+
+.movie-info {
+    flex: 1; /* Это делает блок информации растягиваемым и занимающим оставшееся пространство */
+}
+
+.profile_container{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    border-radius:10px;
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #4b4b4b;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: #fdc4c4 url('https://i.ibb.co/FxzBYR9/night.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input:checked + .slider {
+  background-color: #f6d3d3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #f8d2d2;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+  background: #f3cccc url('https://i.ibb.co/7JfqXxB/sunny.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
