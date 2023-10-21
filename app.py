@@ -118,6 +118,7 @@ def serials():
 
     total_pages = data['total_pages']
 
+
     return render_template('tv.html', movies=movies, current_page=page, total_pages=total_pages)
 
 
