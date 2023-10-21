@@ -122,18 +122,18 @@ def serials():
 
 
 @app.route('/<int:genre>/<string:type>')
-def with_genres(genre, type_video):
+def with_genres(genre, type):
 
     page = request.args.get('page', default=1, type=int)
     genre = request.args.get('genre', default=genre, type=int)
-    if type_video == 'movies':
+    if type == 'movies':
         response = requests.get(f'https://api.themoviedb.org/3/discover/movie/?&language={get_locale()}&with_genres={genre}&api_key={api_key}&page={page}&include_adult=false')
     else:
         response = requests.get(f'https://api.themoviedb.org/3/discover/tv/?&language={get_locale()}&with_genres={genre}&api_key={api_key}&page={page}&include_adult=false')
     data = response.json()
     total_pages = data['total_pages']
 
-    return render_template('genres.html', movies=data, current_page=page, total_pages=total_pages, genre=genre, type=type_video)
+    return render_template('genres.html', movies=data, current_page=page, total_pages=total_pages, genre=genre, type=type)
 
 
 @app.route('/genre')
