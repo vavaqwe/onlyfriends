@@ -6,14 +6,14 @@ import random
 import string
 
 import requests
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_cors import CORS, cross_origin
 from flask_httpauth import HTTPBasicAuth
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from flask_socketio import SocketIO, join_room, leave_room, send
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_babel import Babel , gettext, _
+from flask_babel import Babel, gettext
 
 
 app = Flask(__name__)
@@ -22,16 +22,16 @@ bcrypt = Bcrypt(app)
 babel = Babel(app)
 
 app.config['LANGUAGES'] = {
-    'uk':'Ukrainian',
-    'ru':'Russian',
-    'en':'English'
+    'uk': 'Ukrainian',
+    'ru': 'Russian',
+    'en': 'English'
 }
 
 app.config['SECRET_KEY'] = 'secretic'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'translations'
 app.config['BABEL_DEFAULT_LOCALE'] = 'en'  # Здесь 'en' - это код языка по умолчанию (например, английский).
-cors = CORS(app,resources={r"/*":{"origins":"*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
 socketio = SocketIO(app)
@@ -45,12 +45,14 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return self.id
 
+
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(8), unique=True, nullable=False)
     members = db.Column(db.Integer, default=0)
     is_playing = db.Column(db.Boolean, default=False)
     messages = db.relationship("Message", backref="room", lazy=True)
+
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -99,7 +101,7 @@ def movies():
 def serials():
     page = request.args.get('page', default=1, type=int)
     # Здесь вы можете использовать библиотеку requests, чтобы получить данные с TMDB API
-    response = requests.get(f'https://api.themoviedb.org/3/tv/popular?api_key={api_key}&language={get_locale()}&page={page}&include_adult=false')
+    response = requests.get(f'https://api.themoviedb.org/3/tv/top_rated?api_key={api_key}&language={get_locale()}&page={page}&include_adult=false')
 
     data = response.json()
     # Обработка данных и создание списка фильмов
@@ -116,22 +118,22 @@ def serials():
 
     total_pages = data['total_pages']
 
-    return render_template('tv.html', movies=movies, current_page=page ,total_pages=total_pages)
+    return render_template('tv.html', movies=movies, current_page=page, total_pages=total_pages)
 
 
 @app.route('/<int:genre>/<string:type>')
-def with_genres(genre, type):
+def with_genres(genre, type_video):
 
     page = request.args.get('page', default=1, type=int)
     genre = request.args.get('genre', default=genre, type=int)
-    if type == 'movies':
+    if type_video == 'movies':
         response = requests.get(f'https://api.themoviedb.org/3/discover/movie/?&language={get_locale()}&with_genres={genre}&api_key={api_key}&page={page}&include_adult=false')
     else:
         response = requests.get(f'https://api.themoviedb.org/3/discover/tv/?&language={get_locale()}&with_genres={genre}&api_key={api_key}&page={page}&include_adult=false')
     data = response.json()
     total_pages = data['total_pages']
 
-    return render_template('genres.html', movies=data, current_page=page, total_pages=total_pages, genre=genre, type=type)
+    return render_template('genres.html', movies=data, current_page=page, total_pages=total_pages, genre=genre, type=type_video)
 
 
 @app.route('/genre')
@@ -144,7 +146,7 @@ def genres_list():
     tv = tv_url.json()
 
 
-    return render_template('genre.html', movie=movie , tv=tv)
+    return render_template('genre.html', movie=movie, tv=tv)
 
 
 @app.route('/<string:content_type>/<int:movie_id>')
@@ -153,10 +155,15 @@ def movie_details(content_type, movie_id):
     response = requests.get(url)
     movie_data = response.json()
 
-    url = f'https://api.themoviedb.org/3/{content_type}/movie/{movie_id}?api_key={api_key}&language=ru-RU&include_adult=false&append_to_response=release_dates'
+    url = f'https://api.themoviedb.org/3/{content_type}/{movie_id}?api_key={api_key}&language=ru-RU&include_adult=false&append_to_response=release_dates'
     response = requests.get(url)
     movie_data_for_name = response.json()
-    return render_template('film.html', movie_data=movie_data, content_type=content_type, movie_name=movie_data_for_name)
+
+    url = f'https://api.themoviedb.org/3/{content_type}/{movie_id}/videos?api_key={api_key}'
+    response = requests.get(url)
+    movie_data_for_video = response.json()
+    print(movie_data_for_video['results'])
+    return render_template('film.html', movie_video=movie_data_for_video['results'][0]['key'], movie_data=movie_data, content_type=content_type, movie_name=movie_data_for_name)
 
 
 def get_first_two_digits(number):

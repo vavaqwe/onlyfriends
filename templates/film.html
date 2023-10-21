@@ -6,26 +6,23 @@
     {% elif content_type == 'movie' %}
     <div>
         <h1 class="name_film"><strong>{{ movie_data.title }}</strong></h1>
-            <div class="movie-details">
-                <div class="movie-image">
-                    <img class="title" src="https://image.tmdb.org/t/p/w500/{{ movie_data.poster_path }}" alt="{{ movie_data.title }} Poster">
-                </div>
-                <div class="movie-info">
-                    <p><strong>{{gettext('Жанры:')}}</strong>
-                        {% for genre in movie_data.genres %}
-                            <a class="genre_link" href="{{url_for('with_genres',genre=genre.id , type='movies')}}">{{ genre.name }}</a>
-                            {% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    </p>
-                    <p><strong>{{gettext("Дата выпуска:")}}</strong> {{ movie_data.release_date }}</p>
-                    <p><strong>{{gettext("Оценка:")}}</strong> {{ movie_data.vote_average }}</p>
-                    <p><strong>{{gettext('Описание:')}}</strong> {{ movie_data.overview }}</p>
-                </div>
+        <div class="movie-details">
+            <div class="movie-image">
+                <img class="title" src="https://image.tmdb.org/t/p/w500/{{ movie_data.poster_path }}" alt="{{ movie_data.title }} Poster">
             </div>
-        <div class="film__video">
-            <div id="kinoplayertop"  data-title="{{ movie_name.title ~ ' ' ~ movie_data.release_date[:4] ~ ' / ' ~ movie_data.original_title }}"></div>
-    <script src="//kinoplayer.top/top.js"></script>
+            <div class="movie-info">
+                <p><strong>{{gettext('Жанры:')}}</strong>
+                    {% for genre in movie_data.genres %}
+                        <a class="genre_link" href="{{url_for('with_genres',genre=genre.id , type='movies')}}">{{ genre.name }}</a>
+                        {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p><strong>{{gettext("Дата выпуска:")}}</strong> {{ movie_data.release_date }}</p>
+                <p><strong>{{gettext("Оценка:")}}</strong> {{ movie_data.vote_average }}</p>
+                <p><strong>{{gettext('Описание:')}}</strong> {{ movie_data.overview }}</p>
+            </div>
         </div>
+        <div id="player_movie" data-plyr-provider="youtube" data-plyr-embed-id="{{movie_video}}"></div>
     </div>
     {% elif content_type == 'tv' %}
         <div>
@@ -46,23 +43,14 @@
                     <p>{{gettext('Описание:')}} {{ movie_data.overview }}</p>
                 </div>
             </div>
-            <video
-                id="my-video"
-                class="video-js"
-                controls
-                preload="auto"
-                width="640"
-                height="264"
-                poster="MY_VIDEO_POSTER.jpg"
-                data-setup="{}"
-                >
-                <source src="https://www.youtube.com/watch?v={{trailer_key}}" type="video/mp4" />
-                </p>
-            </video>
+            <div id="player_serials" data-plyr-provider="youtube" data-plyr-embed-id="{{movie_video}}"></div>
         </div>
     {% endif %}
 </div>
     <script src="{{url_for('static',filename='js/film.js')}}"></script>
-    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
-
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script>
+        const player_movie = new Plyr('#player_movie');
+        const player_serial = new Plyr('#player_serials');
+    </script>
 {% endblock %}

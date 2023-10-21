@@ -1,4 +1,3 @@
-runKinoplayertop();
 document.addEventListener('DOMContentLoaded', function() {
     // Проверяем, заблокированы ли рекламные элементы
     var adBlocked = false;
